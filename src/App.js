@@ -6,6 +6,11 @@ import CondicionalRender from './components/CondicionalRender';
 import MostrarNome from './components/MostrarNome';
 import DetalhesCarro from './components/DetalhesCarro';
 import Material from './components/Material';
+import Container from './components/Container';
+import FuncaoComProps from './components/FuncaoComProps';
+import { useState } from 'react';
+import Mensagem from './components/Mensagem';
+import MudarMensagem from './components/MudarMensagem';
 
 
 function App() {
@@ -21,6 +26,16 @@ function App() {
     }
   ]
 
+  function mostrarMensagem() {
+    console.log("TESTEEEEE")
+  }
+
+  const [mensagem, setMensagem] = useState("")
+
+  const handleMensagem = (msg) => {
+    setMensagem(msg)
+  }
+
 
   return (
     <div className="App">
@@ -29,10 +44,19 @@ function App() {
       <RenderizacaoLista />
       <CondicionalRender />
       <MostrarNome nome="Leo" />
-      <DetalhesCarro marca={"VW"} KM={10000} cor={"vermelho"} />
+      <DetalhesCarro 
+      marca={"VW"} 
+      KM={10000} 
+      cor={"vermelho"} />
       {material.map((item) => (
-        <Material id={item.id} objeto={item.objeto} cor={item.cor} TemEstoque={item.TemEstoque} />
+        <Material key={item.id} objeto={item.objeto} cor={item.cor} TemEstoque={item.TemEstoqu} />
       ))}
+      <Container>
+        <p>um paragrafo</p>
+      </Container>
+      <FuncaoComProps minhaFuncao={mostrarMensagem} />
+      <Mensagem msg={mensagem} />
+      <MudarMensagem handleMensagem={handleMensagem} />
     </div>
   );
 }
